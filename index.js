@@ -1,28 +1,27 @@
-const nodemailer = require('nodemailer')
-require('dotenv').config()
+onst nodemailer = require('nodemailer');
 
- const transportador = nodemailer.createTransport({
+const msg = {
+    from: "thiagosantos9225@gmail.com",
+    to: "thiagomessias411@gmail.com",
+    subject: "testando nodemaile",
+    text: "Santos Futebol Clube é um clube poliesportivo brasileiro da cidade de Santos, São Paulo. Foi fundado em 14 de abril de 1912, suas cores iniciais seriam o branco, azul e dourado, mas um ano após a sua fundação, ficou decidido que as cores do clube passariam a ser branco e preto" 
+};
+
+nodemailer.createTransport({
+    service: "gmail",
+    auth:{
+        user: "thiagosantos9225@gmail.com",
+        pass: "Thiago2004"
+    },
+    port: 465,
     host: 'smtp.gmail.com',
-    service: 'gmail',
-    secure: true,
-    auth: {
-        user: process.env.EMAIL,
-        pass: process.env.SENHA
-    }
- })
-
-const emailASerEnviado = {
-    from : process.env.EMAIL,
-    to: 'example@email',
-    subject: 'Teste',
-    text: 'texto'
-}
-
-transportador.sendMail(emailASerEnviado, (err) => {
-    if(err){
-        console.log('seu burro')
-        return
-    }
-
-    console.log('E-mail concluido!!!')
 })
+
+.sendMail(msg, (err)=>{
+    if(err){
+       return console.log("Error",err)
+    }
+    else{
+       return console.log("email enviado")
+    }
+})  
