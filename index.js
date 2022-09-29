@@ -11,7 +11,7 @@ nodemailer.createTransport({
     service: "gmail",
     auth:{
         user: "thiagosantos9225@gmail.com",
-        pass: "Thiago2004"
+        pass: "######"
     },
     port: 465,
     host: 'smtp.gmail.com',
