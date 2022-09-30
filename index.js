@@ -25,5 +25,5 @@ transporter.sendMail(mailOptions, (err, data) => {
     if (err) {
         return log('Error occurs');
     }
-    return log('Email sent!!!');
+    return log('Email Esent!!!');
 });
