@@ -1,56 +1,29 @@
-const nodemailer = require('nodemailer');
+require('dotenv').config();
 
-const msg = {
-    from: "thiagosantos9225@gmail.com",
-    to: "thiagomessias411@gmail.com",
-    subject: "testando nodemaile",
-    text: "Santos Futebol Clube é um clube poliesportivo brasileiro da cidade de Santos, São Paulo. Foi fundado em 14 de abril de 1912, suas cores iniciais seriam o branco, azul e dourado, mas um ano após a sua fundação, ficou decidido que as cores do clube passariam a ser branco e preto" 
+const nodemailer = require('nodemailer');
+const log = console.log;
+
+// Step 1
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL || 't##m', // TODO: your gmail account
+        pass: process.env.PASSWORD || 'T###4' // TODO: your gmail password
+    }
+});
+
+// Step 2
+let mailOptions = {
+    from: 'abc@gmail.com', // TODO: email sender
+    to: 'cba@gmail.com', // TODO: email receiver
+    subject: 'Nodemailer - Test',
+    text: 'Wooohooo it works!!'
 };
 
-nodemailer.createTransport({
-    service: "gmail",
-    auth:{
-        user: "thiagosantos9225@gmail.com",
-        pass: "######"
-    },
-    port: 465,
-    host: 'smtp.gmail.com',
-})
-
-.sendMail(msg, (err)=>{
-    if(err){
-       return console.log("Error",err)
+// Step 3
+transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+        return log('Error occurs');
     }
-    else{
-       return console.log("email enviado")
-    }
-})  
-
-#const nodemailer = require('nodemailer');
-
-let mailTransporter = nodemailer.createTransport({
-    service: "gmail",
-    port: 587,
-    secure: false,
-    auth:{
-        user: "thiagosantos9225@gmail.com",
-        pass: "####"
-    }
-})
-
-let details = {
-    from: "thiagosantos9225@gmail.com",
-    to: "thiagomessias411@gmail.com",
-    subject: "testando nodemaile",
-    text: "Santos Futebol Clube é um clube poliesportivo brasileiro da cidade de Santos, São Paulo. Foi fundado em 14 de abril de 1912, suas cores iniciais seriam o branco, azul e dourado, mas um ano após a sua fundação, ficou decidido que as cores do clube passariam a ser branco e preto" 
-}
-
-mailTransporter.sendMail(details,(err)=>{
-    if(err){
-        console.log("Error",err)
-    }
-    else{
-        console.log("email enviado")
-    }
-})  */
-
+    return log('Email sent!!!');
+});
