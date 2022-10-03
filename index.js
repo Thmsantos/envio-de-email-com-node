@@ -1,29 +1,41 @@
-require('dotenv').config();
-
 const nodemailer = require('nodemailer');
-const log = console.log;
 
-// Step 1
+let num_Um = []
+for(let x = 0; x < 3; x++){
+    let numero = Math.floor(Math.random() * 10)
+    num_Um.push(numero)
+}
+num_Um = num_Um.join("")
+
+let num_Dois = []
+for(let x = 0; x < 2; x++){
+    let numero = Math.floor(Math.random() * 10)
+    num_Dois.push(numero)
+}
+num_Dois = num_Dois.join("")
+
+let numero = num_Dois + num_Um
+
 let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'hotmail',
     auth: {
-        user: process.env.EMAIL || 't##m', // TODO: your gmail account
-        pass: process.env.PASSWORD || 'T###4' // TODO: your gmail password
+        user: "thiagomessias411@outlook.com",
+        pass: "######"
     }
 });
 
-// Step 2
 let mailOptions = {
-    from: 'abc@gmail.com', // TODO: email sender
-    to: 'cba@gmail.com', // TODO: email receiver
-    subject: 'Nodemailer - Test',
-    text: 'Wooohooo it works!!'
+    from: 'thiagomessias411@outlook.com',
+    to: 'othiagosantos23@gmail.com', 
+    subject: 'recuperação de senha',
+    html: `<h1>${numero}</h1>`
 };
 
-// Step 3
 transporter.sendMail(mailOptions, (err, data) => {
     if (err) {
-        return log('Error occurs');
+        console.log(err);
     }
-    return log('Email Esent!!!');
+    console.log('Email Esent!!!');
 });
+
+console.log(numero)
